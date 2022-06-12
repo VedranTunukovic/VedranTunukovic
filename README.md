@@ -1,0 +1,4 @@
+- 👋 Hi, I’m @VedranTunukovic
+- 👀 I’m interested in machine learning, non destructive testing, composite materials and ultrasound
+- 🌱 I’m currently learning how to apply machine learning to ultrasound data
+- 📫 How to reach me: vedran.tunukovic@strath.ac.uk

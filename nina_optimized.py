@@ -1,7 +1,6 @@
 import os
 import glob
 import pandas as pd
-import time
 
 def clean_extensions(samples):
     """

@@ -51,13 +51,15 @@ def process(samples):
             df = df[["avsnp150", "Ref", "Alt", "GT"]]
             df.rename(columns={"avsnp150": "SNP"}, inplace=True)
             df = df[df['SNP'].isin(reference.iloc[:, 0].to_list())]
-
-            existing_values = set(frozenset(row) for row in df[["SNP", "Ref", "Alt"]].values)
-            for _, row in reference.iterrows():
-                if frozenset(row[0:3]) not in existing_values:
-                    new_row = pd.DataFrame([row[0], row[1], row[2], '0/0'], index=df.columns).T
+            
+            reference_snp = reference.iloc[:, 0].to_list()
+            existing_snp = df.iloc[:, 0].to_list()
+            
+            for a in reference_snp:
+                if a not in existing_snp:
+                    new_row = reference.loc[reference['SNP'] == a]
                     df = pd.concat([df, new_row], ignore_index=True)
-                    existing_values.add(frozenset(row[0:3]))
+                    existing_snp.append(a)
 
             save_filename = os.path.splitext(os.path.basename(file_name))[0] + '_clean.xlsx'
             df.to_excel(os.path.join(path, save_filename), index=False)
